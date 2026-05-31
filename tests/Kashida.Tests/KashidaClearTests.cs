@@ -2,21 +2,24 @@ namespace Kashida.Tests;
 
 public class KashidaClearTests
 {
+    private readonly static string _normalText = "الـسـلام عـلـيـكـم";
+    private readonly static string _normalTextExpected = "السلام عليكم";
+    private readonly static string _vowelledText = "الـسَّـلَامُ عَـلَـيْـكُـمْ";
+    private readonly static string _vowelledTextExpected = "السَّلَامُ عَلَيْكُمْ";
+
     [Fact]
     public void ClearKashida_GivenNormalText_ShouldReturnClearedText()
     {
-        var result = Kashida.ClearKashida("الـسـلام عـلـيـكـم");
-        var expectedResult = "السلام عليكم";
+        var result = Kashida.ClearKashida(_normalText);
 
-        Assert.Equal(expectedResult, result);
+        Assert.Equal(_normalTextExpected, result);
     }
 
     [Fact]
     public void ClearKashida_GivenVowelledText_ShouldReturnClearedText()
     {
-        var result = Kashida.ClearKashida("الـسَّـلَامُ عَـلَـيْـكُـمْ");
-        var expectedResult = "السَّلَامُ عَلَيْكُمْ";
+        var result = Kashida.ClearKashida(_vowelledText);
 
-        Assert.Equal(expectedResult, result);
+        Assert.Equal(_vowelledTextExpected, result);
     }
 }
