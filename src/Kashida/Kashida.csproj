@@ -9,12 +9,14 @@
   <PropertyGroup>
     <!-- Package Identity -->
     <PackageId>Kashida</PackageId>
-    <PackageVersion>0.1.2-beta</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Authors>Ziad Yahya</Authors>
 
     <!-- Package Info -->
     <Description>
-      A simple .NET library to apply and clear Arabic kashida (Tatweel) styling in text.
+      Kashida is a lightweight C# utility for applying and removing Arabic Kashida (elongation)
+      characters while preserving diacritics. It is implemented as a single static class with simple
+      and safe APIs.
     </Description>
 
     <PackageTags>Arabic;Kashida;Tatweel;Pattern;Style</PackageTags>
