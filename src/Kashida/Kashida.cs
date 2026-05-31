@@ -39,7 +39,7 @@ public static class Kashida
                 if (ElongatableChars.Contains(current) && CanConnectFromRight(nextRealChar))
                 {
                     if (current == 'ل' && nextRealChar == 'ا')
-                        continue; // Exception for the "لا" ligature
+                        continue;
 
                     int diacriticCount = nextIndex - (i + 1);
                     for (int d = 1; d <= diacriticCount; d++)
@@ -73,7 +73,7 @@ public static class Kashida
     private static bool IsHarakah(char ch)
     {
         return (ch >= 0x064B && ch <= 0x0652) ||
-               ch == 0x0653 || ch == 0x0654; // الشدة والهمزة الفوقية كعلامات
+               ch == 0x0653 || ch == 0x0654;
     }
 
     private static bool CanConnectFromRight(char ch)
