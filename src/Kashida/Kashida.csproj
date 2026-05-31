@@ -6,4 +6,39 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!-- Package Identity -->
+    <PackageId>Kashida</PackageId>
+    <PackageVersion>0.1.2-beta</PackageVersion>
+    <Authors>Ziad Yahya</Authors>
+
+    <!-- Package Info -->
+    <Description>
+      A simple .NET library to apply and clear Arabic kashida (Tatweel) styling in text.
+    </Description>
+
+    <PackageTags>Arabic;Kashida;Tatweel;Pattern;Style</PackageTags>
+
+    <!-- Package Reference -->
+    <RepositoryUrl>https://github.com/zyahya/kashida</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/zyahya/kashida</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Licensing -->
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <!-- Documentation -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+
+    <!-- Build -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>.\nugpkg</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include=".\Assets\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
 </Project>
