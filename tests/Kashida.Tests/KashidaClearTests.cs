@@ -5,7 +5,7 @@ public class KashidaClearTests
     [Fact]
     public void ClearKashida_GivenNormalText_ShouldReturnClearedText()
     {
-        var result = Kashida.Clear("الـسـلام عـلـيـكـم");
+        var result = Kashida.ClearKashida("الـسـلام عـلـيـكـم");
         var expectedResult = "السلام عليكم";
 
         Assert.Equal(expectedResult, result);
@@ -14,7 +14,7 @@ public class KashidaClearTests
     [Fact]
     public void ClearKashida_GivenVowelledText_ShouldReturnClearedText()
     {
-        var result = Kashida.Clear("الـسَّـلَامُ عَـلَـيْـكُـمْ");
+        var result = Kashida.ClearKashida("الـسَّـلَامُ عَـلَـيْـكُـمْ");
         var expectedResult = "السَّلَامُ عَلَيْكُمْ";
 
         Assert.Equal(expectedResult, result);
