@@ -9,7 +9,6 @@
   <PropertyGroup>
     <!-- Package Identity -->
     <PackageId>Kashida</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
     <Authors>Ziad Yahya</Authors>
 
     <!-- Package Info -->
@@ -30,10 +29,6 @@
     <!-- Documentation -->
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-
-    <!-- Build -->
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageOutputPath>.\nugpkg</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
