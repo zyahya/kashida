@@ -17,7 +17,7 @@ dotnet add package Kashida
 
 ## ✨ API Reference
 
-### `string Apply(this string text, int kashidaCount = 1)`
+### `string ApplyKashida(this string text, int kashidaCount = 1)`
 
 Adds Kashida to elongatable letters while respecting Arabic joining rules and diacritics.
 
@@ -36,7 +36,7 @@ Adds Kashida to elongatable letters while respecting Arabic joining rules and di
 - Diacritics after a letter are kept and Kashida is inserted after them.
 - The ligature **"لا"** is excluded.
 
-### `string Clear(string text)`
+### `string ClearKashida(this string text)`
 
 Removes all Kashida characters from the input while preserving diacritics.
 
