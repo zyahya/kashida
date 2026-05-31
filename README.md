@@ -9,10 +9,10 @@ Kashida is a lightweight C# utility for applying and removing Arabic Kashida (el
 - Skips ligature cases like **"لا"**
 - Removes all Kashida characters when needed
 
-## 📦 Namespace
+## 📦 Installation
 
-```csharp
-using Kashida;
+```
+dotnet add package Kashida
 ```
 
 ## ✨ API Reference
