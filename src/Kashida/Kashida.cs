@@ -1,90 +1,84 @@
-﻿namespace Kashida;
+﻿using System.Text;
+
+namespace Kashida;
 
 public static class Kashida
 {
-    private static readonly char[] ArabicCharacters = [
-        'ء', 'آ', 'أ', 'ؤ', 'إ', 'ئ', 'ا', 'ب', 'ة', 'ت', 'ث', 'ج', 'ح', 'خ',
-        'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق',
-        'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ى', 'ي'
-    ];
-    private static readonly char[] AcceptingCharacters = [
-        'ب', 'ي', 'س', 'ش', 'ل', 'ن', 'م', 'ك', 'ج', 'ح', 'خ',
-        'ه', 'ع', 'غ', 'ف', 'ق', 'ث', 'ص', 'ض', 'ى', 'و', 'ط', 'ظ'
-    ];
-    private static readonly char[] NonAcceptingCharacters = ['ء', 'ر', 'ة', 'ا', 'أ', 'ؤ', 'و', 'د', 'ذ', 'ز'];
-    private static readonly char ExtendedChar = 'ـ';
+    private static readonly char KashidaChar = 'ـ';
 
-    public static string Apply(string input)
+    private static readonly HashSet<char> ElongatableChars = new HashSet<char> {
+        'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ي'
+    };
+
+    /// <summary>
+    /// Adds Kashida to elongatable Arabic letters, with full support for diacritics.
+    /// </summary>
+    public static string Apply(this string text, int kashidaCount = 1)
     {
-        var inputList = input.ToList();
-        List<string> result = [];
+        if (string.IsNullOrEmpty(text)) return text;
 
-        for (int i = 0; i < inputList.Count; i++)
+        var sb = new StringBuilder();
+
+        for (int i = 0; i < text.Length; i++)
         {
-            var currentChar = inputList[i];
+            char current = text[i];
+            sb.Append(current);
 
-            if (IsLastChar(string.Join("", inputList), currentChar))
+            if (IsHarakah(current)) continue;
+
+            int nextIndex = i + 1;
+            while (nextIndex < text.Length && IsHarakah(text[nextIndex]))
             {
-                result.Add(string.Concat(currentChar));
-                break;
+                nextIndex++;
             }
 
-            var nextChar = inputList[i + 1];
-
-            if (!IsArabicChar(currentChar))
+            if (nextIndex < text.Length)
             {
-                result.Add(string.Concat(currentChar));
-            }
+                char nextRealChar = text[nextIndex];
 
-            if (IsArabicChar(currentChar))
-            {
-                if (IsInNonAcceptingCharacters(currentChar))
+                if (ElongatableChars.Contains(current) && CanConnectFromRight(nextRealChar))
                 {
-                    result.Add(string.Concat(currentChar));
-                }
-                else if (nextChar == ' ' || !IsArabicChar(nextChar))
-                {
-                    result.Add(string.Concat(currentChar));
-                }
-                else
-                {
-                    result.Add(string.Concat(currentChar, ExtendedChar));
+                    if (current == 'ل' && nextRealChar == 'ا')
+                        continue; // Exception for the "لا" ligature
+
+                    int diacriticCount = nextIndex - (i + 1);
+                    for (int d = 1; d <= diacriticCount; d++)
+                    {
+                        sb.Append(text[i + d]);
+                    }
+
+                    sb.Append(new string(KashidaChar, kashidaCount));
+
+                    i += diacriticCount;
                 }
             }
         }
 
-        return string.Join("", result);
+        return sb.ToString();
     }
 
-    private static bool IsInAcceptingCharacters(char input)
+    /// <summary>
+    /// Removes all Kashida (elongation) characters from the text, preserving diacritics.
+    /// </summary>
+    public static string Clear(string text)
     {
-        return AcceptingCharacters.Contains(input);
+        if (string.IsNullOrEmpty(text)) return text;
+
+        return text.Replace(KashidaChar.ToString(), string.Empty);
     }
 
-    private static bool IsInNonAcceptingCharacters(char input)
+    /// <summary>
+    /// Checks if a character is an Arabic diacritic (Harakah)
+    /// </summary>
+    private static bool IsHarakah(char ch)
     {
-        return NonAcceptingCharacters.Contains(input);
+        return (ch >= 0x064B && ch <= 0x0652) ||
+               ch == 0x0653 || ch == 0x0654; // الشدة والهمزة الفوقية كعلامات
     }
 
-    private static bool IsLastChar(string source, char input)
+    private static bool CanConnectFromRight(char ch)
     {
-        char lastChar = source[^1];
-        return input == lastChar;
-    }
-
-    private static bool IsArabicChar(char input)
-    {
-        if (ArabicCharacters.Contains(input))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public static string Clear(string input)
-    {
-        var inputList = input.ToList();
-        inputList.RemoveAll(e => e == ExtendedChar);
-        return string.Join("", inputList);
+        string nonConnectingRight = "ءآأؤإاةدذرزوٰ ";
+        return ch >= 0x0600 && ch <= 0x06FF && !nonConnectingRight.Contains(ch);
     }
 }
