@@ -1,4 +1,4 @@
-﻿namespace ArabicKashidaStyle;
+﻿namespace Kashida;
 
 public static class Kashida
 {
