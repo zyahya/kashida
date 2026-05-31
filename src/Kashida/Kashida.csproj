@@ -14,9 +14,7 @@
 
     <!-- Package Info -->
     <Description>
-      Kashida is a lightweight C# utility for applying and removing Arabic Kashida (elongation)
-      characters while preserving diacritics. It is implemented as a single static class with simple
-      and safe APIs.
+      A lightweight C# utility to add or remove Arabic Kashida (elongation) while safely preserving diacritics.
     </Description>
 
     <PackageTags>Arabic;Kashida;Tatweel;Pattern;Style</PackageTags>
