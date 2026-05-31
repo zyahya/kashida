@@ -2,4 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/Kashida/Kashida.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Kashida.Tests/Kashida.Tests.csproj" />
+  </Folder>
 </Solution>
