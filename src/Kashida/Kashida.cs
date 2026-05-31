@@ -13,7 +13,7 @@ public static class Kashida
     /// <summary>
     /// Adds Kashida to elongatable Arabic letters, with full support for diacritics.
     /// </summary>
-    public static string Apply(this string text, int kashidaCount = 1)
+    public static string ApplyKashida(this string text, int kashidaCount = 1)
     {
         if (string.IsNullOrEmpty(text)) return text;
 
@@ -60,7 +60,7 @@ public static class Kashida
     /// <summary>
     /// Removes all Kashida (elongation) characters from the text, preserving diacritics.
     /// </summary>
-    public static string Clear(string text)
+    public static string ClearKashida(this string text)
     {
         if (string.IsNullOrEmpty(text)) return text;
 

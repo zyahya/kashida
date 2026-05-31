@@ -56,10 +56,10 @@ using Kashida;
 var text = "السَّلَامُ عَلَيْكُمْ";
 
 // Add Kashida
-var elongated = text.Apply(2); // الـسَّـلَامُ عَـلَـيْـكُـمْ
+var elongated = text.ApplyKashida(); // الـسَّـلَامُ عَـلَـيْـكُـمْ
 
 // Remove Kashida
-var cleared = Kashida.Clear(elongated); // السَّلَامُ عَلَيْكُمْ
+var cleared = elongated.ClearKashida(); // السَّلَامُ عَلَيْكُمْ
 ```
 
 ## ✅ How Kashida Placement Works
