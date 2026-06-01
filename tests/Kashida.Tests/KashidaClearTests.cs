@@ -22,4 +22,12 @@ public class KashidaClearTests
 
         Assert.Equal(_vowelledTextExpected, result);
     }
+
+    [Fact]
+    public void ClearKashida_ToEmptyString()
+    {
+        var result = string.Empty.ClearKashida();
+
+        Assert.Equal(string.Empty, result);
+    }
 }
