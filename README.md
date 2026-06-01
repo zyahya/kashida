@@ -1,4 +1,4 @@
-# Kashida || كـشــيــدة
+# Kashida || كـــشـــيـــدة
 
 A lightweight C# utility to add or remove Arabic Kashida (elongation) while safely preserving diacritics.
 
