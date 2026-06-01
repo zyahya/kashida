@@ -10,7 +10,7 @@ public class KashidaApplyTests
     [Fact]
     public void ApplyKashida_Transforms_Normal_Text()
     {
-        var result = Kashida.ApplyKashida(_normalText);
+        var result = _normalText.ApplyKashida();
 
         Assert.Equal(_normalTextExpected, result);
     }
@@ -18,7 +18,7 @@ public class KashidaApplyTests
     [Fact]
     public void ApplyKashida_Transforms_Vowelled_Text()
     {
-        var result = Kashida.ApplyKashida(_vowelledText);
+        var result = _vowelledText.ApplyKashida();
 
         Assert.Equal(_vowelledTextExpected, result);
     }

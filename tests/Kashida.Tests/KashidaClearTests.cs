@@ -10,7 +10,7 @@ public class KashidaClearTests
     [Fact]
     public void ClearKashida_GivenNormalText_ShouldReturnClearedText()
     {
-        var result = Kashida.ClearKashida(_normalText);
+        var result = _normalText.ClearKashida();
 
         Assert.Equal(_normalTextExpected, result);
     }
@@ -18,7 +18,7 @@ public class KashidaClearTests
     [Fact]
     public void ClearKashida_GivenVowelledText_ShouldReturnClearedText()
     {
-        var result = Kashida.ClearKashida(_vowelledText);
+        var result = _vowelledText.ClearKashida();
 
         Assert.Equal(_vowelledTextExpected, result);
     }
