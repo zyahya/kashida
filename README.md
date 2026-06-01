@@ -1,18 +1,25 @@
-# Kashida || كـشـيـدة
+# Kashida || كـشــيــدة
 
-Kashida is a lightweight C# utility for applying and removing Arabic Kashida (elongation) characters while preserving diacritics. It is implemented as a single static class with simple and safe APIs.
-
-## ✅ What it does
-
-- Inserts Kashida between eligible Arabic letters
-- Preserves diacritics (tashkeel/harakat)
-- Skips ligature cases like **"لا"**
-- Removes all Kashida characters when needed
+A lightweight C# utility to add or remove Arabic Kashida (elongation) while safely preserving diacritics.
 
 ## 📦 Installation
 
 ```
 dotnet add package Kashida
+```
+
+## ✅ Example Usage
+
+```csharp
+using Kashida;
+
+var text = "السَّلَامُ عَلَيْكُمْ";
+
+// Add Kashida
+var elongated = text.ApplyKashida(); // الـسَّـلَامُ عَـلَـيْـكُـمْ
+
+// Remove Kashida
+var cleared = elongated.ClearKashida(); // السَّلَامُ عَلَيْكُمْ
 ```
 
 ## ✨ API Reference
@@ -48,39 +55,10 @@ Removes all Kashida characters from the input while preserving diacritics.
 
 - A new string without Kashida characters.
 
-## ✅ Example Usage
-
-```csharp
-using Kashida;
-
-var text = "السَّلَامُ عَلَيْكُمْ";
-
-// Add Kashida
-var elongated = text.ApplyKashida(); // الـسَّـلَامُ عَـلَـيْـكُـمْ
-
-// Remove Kashida
-var cleared = elongated.ClearKashida(); // السَّلَامُ عَلَيْكُمْ
-```
-
-## ✅ How Kashida Placement Works
-
-- Only letters in the elongatable list are eligible.
-- The next _real_ character (ignoring diacritics) must connect from the right.
-- If diacritics exist after the current character, Kashida is inserted **after** them.
-- The combination **"لا"** is skipped.
-
 ## 📌 Supported Unicode Range
 
 - Arabic block: `U+0600` → `U+06FF`
 - Diacritics: `U+064B` → `U+0652`, plus `U+0653`, `U+0654`
-
-## 🧪 Tests
-
-Unit tests are available in the `tests/Kashida.Tests` project and cover:
-
-- Apply logic
-- Clear logic
-- Diacritic-safe behavior
 
 ## 🧾 License
 
