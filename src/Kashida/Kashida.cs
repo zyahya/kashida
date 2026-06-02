@@ -20,7 +20,7 @@ public static class Kashida
             return text;
         }
 
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(text.Length);
 
         for (int i = 0; i < text.Length; i++)
         {
@@ -32,34 +32,27 @@ public static class Kashida
                 continue;
             }
 
-            int nextIndex = i + 1;
-            while (nextIndex < text.Length && IsHarakah(text[nextIndex]))
+            int nextIndex = SkipHarakah(text, i + 1);
+            if (nextIndex >= text.Length)
             {
-                nextIndex++;
+                continue;
             }
 
-            if (nextIndex < text.Length)
+            char nextRealChar = text[nextIndex];
+            if (!ElongatableChars.Contains(current) ||
+                !CanConnectFromRight(nextRealChar) ||
+                (current == 'ل' && nextRealChar == 'ا'))
             {
-                char nextRealChar = text[nextIndex];
-
-                if (ElongatableChars.Contains(current) && CanConnectFromRight(nextRealChar))
-                {
-                    if (current == 'ل' && nextRealChar == 'ا')
-                    {
-                        continue;
-                    }
-
-                    int diacriticCount = nextIndex - (i + 1);
-                    for (int d = 1; d <= diacriticCount; d++)
-                    {
-                        sb.Append(text[i + d]);
-                    }
-
-                    sb.Append(new string(KashidaChar, kashidaCount));
-
-                    i += diacriticCount;
-                }
+                continue;
             }
+
+            for (int d = i + 1; d < nextIndex; d++)
+            {
+                sb.Append(text[d]);
+            }
+
+            sb.Append(new string(KashidaChar, kashidaCount));
+            i = nextIndex - 1;
         }
 
         return sb.ToString();
@@ -85,6 +78,17 @@ public static class Kashida
     {
         return (ch >= 0x064B && ch <= 0x0652) ||
                ch == 0x0653 || ch == 0x0654;
+    }
+
+    private static int SkipHarakah(string text, int startIndex)
+    {
+        int index = startIndex;
+        while (index < text.Length && IsHarakah(text[index]))
+        {
+            index++;
+        }
+
+        return index;
     }
 
     private static bool CanConnectFromRight(char ch)
