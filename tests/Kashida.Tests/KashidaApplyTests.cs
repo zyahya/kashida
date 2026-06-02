@@ -13,8 +13,8 @@ public class KashidaApplyTests
     """;
 
     private const string _normalComplexTextExpected = """
-    إذا رأيـت نـيـوب اللـيـث بـارزة
-    فـلا تـظـنـن أن اللـيـث يـبـتـسـم
+    إذا رأيـت نـيوب الـلـيـث بارزة
+    فـلا تـظـنـن أن الـلـيـث يـبـتـسـم
     """;
 
     private const string _vowelledComplexText = """
@@ -23,7 +23,7 @@ public class KashidaApplyTests
     """;
 
     private const string _vowelledComplexTextExpected = """
-    إذا رأيـتَ نـيـوبَ اللـيـث بـارزةً
+    إذا رأيـتَ نـيوبَ الـلـيـث بارزةً
     فَـلا تَـظُـنَّـنَّ أنَّ الـلَـيـثَ يـبـتَـسِـمُ
     """;
 
