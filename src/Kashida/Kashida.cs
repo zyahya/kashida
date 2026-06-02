@@ -15,7 +15,10 @@ public static class Kashida
     /// </summary>
     public static string ApplyKashida(this string text, int kashidaCount = 1)
     {
-        if (string.IsNullOrEmpty(text)) return text;
+        if (string.IsNullOrEmpty(text))
+        {
+            return text;
+        }
 
         var sb = new StringBuilder();
 
@@ -24,7 +27,10 @@ public static class Kashida
             char current = text[i];
             sb.Append(current);
 
-            if (IsHarakah(current)) continue;
+            if (IsHarakah(current))
+            {
+                continue;
+            }
 
             int nextIndex = i + 1;
             while (nextIndex < text.Length && IsHarakah(text[nextIndex]))
@@ -39,7 +45,9 @@ public static class Kashida
                 if (ElongatableChars.Contains(current) && CanConnectFromRight(nextRealChar))
                 {
                     if (current == 'ل' && nextRealChar == 'ا')
+                    {
                         continue;
+                    }
 
                     int diacriticCount = nextIndex - (i + 1);
                     for (int d = 1; d <= diacriticCount; d++)
@@ -62,7 +70,10 @@ public static class Kashida
     /// </summary>
     public static string ClearKashida(this string text)
     {
-        if (string.IsNullOrEmpty(text)) return text;
+        if (string.IsNullOrEmpty(text))
+        {
+            return text;
+        }
 
         return text.Replace(KashidaChar.ToString(), string.Empty);
     }
